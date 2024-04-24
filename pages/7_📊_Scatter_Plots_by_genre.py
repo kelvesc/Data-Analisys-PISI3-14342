@@ -3,7 +3,7 @@ import numpy as np
 import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
-from pages.util.plot_pages_util import read_titanic_df, build_nota_titanic, build_dataframe_section, get_color_sequence_names, get_color_sequence
+from pages.util.plot_pages_util import read_spotify_df, build_nota_spotify, build_dataframe_section, get_color_sequence_names, get_color_sequence
 
 def build_page():
     build_header()
@@ -14,36 +14,25 @@ def build_header():
     '<p>Esta página apresenta alguns gráficos a partir da base de dados do '+\
     'Spotify¹ (https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset).</p>'
     st.write(text, unsafe_allow_html=True)
-    build_nota_titanic()
+    # build_nota_titanic()
 
 def build_body():
-    df = read_titanic_df()
-    build_dataframe_section(df)
-    st.markdown('<h2>Gráficos Relativos à Idade</h2>', unsafe_allow_html=True)
+    df = read_spotify_df()
+    # build_dataframe_section(df)
+    st.markdown('<h2>Gráficos Relativos ao Gênero Musical</h2>', unsafe_allow_html=True)
     build_scatter_section(df)
-    build_bubble_section(df)
-    build_histograma_section(df)
-    build_boxplot_section(df)
+    # build_bubble_section(df)
+    # build_histograma_section(df)
+    # build_boxplot_section(df)
 
 def build_scatter_section(df:pd.DataFrame):
     #see: https://plotly.com/python/marker-style/
     st.markdown('<h3>Scatter</h3>', unsafe_allow_html=True)
     df_numerical_columns = df.select_dtypes(include=['float64', 'int64'])
-    col1, col2 = st.columns([.5,.5])
-    col1.selectbox('Relate to:', df_numerical_columns.columns)
-    col2.selectbox('Relate to:', df_numerical_columns.columns)
-    selected_options = st.multiselect("Select options", df_numerical_columns.columns, max_value=2)
-    genres = df['track_genre'].unique()
-    filtered_df  = df['track_genre', selected_options]
-    #ordenamento para bater com a ordem das sequencias de simbolo e cor
-    df.sort_values(by=['sexo','classe'], ascending=[False, True], inplace=True)
-    fig, ax = plt.subplots()
-    ax.scatter()
-    # fig = px.scatter(df, x='idade', y='tarifa', color='track_genre', symbol='classe', 
-    #                  opacity=.75, color_discrete_sequence=['#99ccff','#ffb3b3'], 
-    #                  symbol_sequence=['circle','square','triangle-down'])
-    # fig.update_traces(marker_size=8, marker_line_width=1)
-    st.plotly_chart(fig, use_container_width=True)
+    selected_options = st.multiselect("Select options", df_numerical_columns.columns, max_selections=2)
+    if len(selected_options) == 2:
+        fig = px.scatter(df, x=selected_options[0], y=selected_options[1])
+        st.plotly_chart(fig, use_container_width=True)
 
 def build_bubble_section(df:pd.DataFrame):
     st.markdown('<h3>Bubble</h3>', unsafe_allow_html=True)
