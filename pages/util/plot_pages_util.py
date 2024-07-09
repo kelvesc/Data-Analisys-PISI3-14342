@@ -3,24 +3,32 @@ import streamlit as st
 import plotly.express as px
 from utils import read_df
 
-def build_nota_titanic():
+def build_nota_spotify():
     with st.expander('¹Notas sobre o dataset do Titanic'):
         st.write(
         '''
         <table>
             <tr><th>COLUNA ORGIGINAL</th><th>COLUNA</th><th>DESCRIÇÃO</th></tr>
-            <tr><td>PassengerId</td><td>id</td><td>O Id do passageiro.</td></tr>
-            <tr><td>Name</td><td>nome</td><td>Nome do passageiro.</td></tr>
-            <tr><td>Survived</td><td>sobreviveu</td><td>Sobreviveu: 0 = Não, 1 = Sim</td></tr>
-            <tr><td>Pclass</td><td>classe</td><td>Classe do Passageiro: 1 = 1a. classe, 2 = 2a classe, 3 = 3a classe</td></tr>
-            <tr><td>Sex</td><td>sexo</td><td>Sexo</td></tr>
-            <tr><td>Age</td><td>idade</td><td>Idade em anos</td></tr>
-            <tr><td>SibSp</td><td>irmaos</td><td># de irmãos/esposa no Titanic.</td></tr>
-            <tr><td>Parch</td><td>pais</td><td># de pais/filhos no Titanic.</td></tr>
-            <tr><td>Ticket</td><td>id_passagem</td><td>Número da passagem.</td></tr>
-            <tr><td>Fare</td><td>tarifa</td><td>Tarifa da passagem.</td></tr>
-            <tr><td>Cabin</td><td>cabine</td><td>Número da cabine</td></tr>
-            <tr><td>Embarked</td><td>embarque</td><td>Local de embarque C = Cherbourg, Q = Queenstown, S = Southampton</td></tr>
+            <tr><td>track_id</td><td>id</td><td>O Id da música.</td></tr>
+            <tr><td>artists</td><td>nome</td><td>Nome do passageiro.</td></tr>
+            <tr><td>album_name</td><td>sobreviveu</td><td>Sobreviveu: 0 = Não, 1 = Sim</td></tr>
+            <tr><td>track_name</td><td>classe</td><td>Classe do Passageiro: 1 = 1a. classe, 2 = 2a classe, 3 = 3a classe</td></tr>
+            <tr><td>popularity</td><td>sexo</td><td>Sexo</td></tr>
+            <tr><td>duration_ms</td><td>idade</td><td>Idade em anos</td></tr>
+            <tr><td>explicit</td><td>irmaos</td><td># de irmãos/esposa no Titanic.</td></tr>
+            <tr><td>danceability</td><td>pais</td><td># de pais/filhos no Titanic.</td></tr>
+            <tr><td>energy</td><td>id_passagem</td><td>Número da passagem.</td></tr>
+            <tr><td>key</td><td>tarifa</td><td>Tarifa da passagem.</td></tr>
+            <tr><td>loudness</td><td>cabine</td><td>Número da cabine</td></tr>
+            <tr><td>mode</td><td>cabine</td><td>Número da cabine</td></tr>
+            <tr><td>speechiness</td><td>cabine</td><td>Número da cabine</td></tr>
+            <tr><td>acousticness</td><td>cabine</td><td>Número da cabine</td></tr>
+            <tr><td>instrumentalness</td><td>cabine</td><td>Número da cabine</td></tr>
+            <tr><td>liveness</td><td>cabine</td><td>Número da cabine</td></tr>
+            <tr><td>valence</td><td>cabine</td><td>Número da cabine</td></tr>
+            <tr><td>tempo</td><td>cabine</td><td>Número da cabine</td></tr>
+            <tr><td>time_signature</td><td>cabine</td><td>Número da cabine</td></tr>
+            <tr><td>track_genre</td><td>cabine</td><td>Número da cabine</td></tr>
         </table>
         <br>
         Notas:<br>
@@ -33,7 +41,7 @@ def build_nota_titanic():
         ''', unsafe_allow_html=True)
 
 def build_dataframe_section(df:pd.DataFrame):
-    st.write('<h2>Dados do Titanic</h2>', unsafe_allow_html=True)
+    st.write('<h2>Dados do Spotify</h2>', unsafe_allow_html=True)
     st.dataframe(df)
 
 def __ingest_titanic_data() -> pd.DataFrame:
@@ -56,6 +64,11 @@ def __transform_titanic_data(df:pd.DataFrame) -> pd.DataFrame:
     })
     df.sort_values(by=['classe_val','idade','id'], inplace=True)
     return df
+
+def read_spotify_df() -> pd.DataFrame:
+    df = read_df('spotfy_tracks_dataset')
+    return df
+
 
 def read_titanic_df() -> pd.DataFrame:
     return __transform_titanic_data(__ingest_titanic_data())

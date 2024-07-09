@@ -3,7 +3,7 @@ import numpy as np
 import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
-from pages.util.plot_pages_util import read_titanic_df, build_nota_titanic, build_dataframe_section, get_color_sequence_names, get_color_sequence
+from pages.util.plot_pages_util import read_titanic_df, build_nota_spotify, build_dataframe_section, get_color_sequence_names, get_color_sequence
 
 def build_page():
     build_header()
@@ -14,7 +14,7 @@ def build_header():
     '<p>Esta página apresenta alguns gráficos a partir da base de dados do '+\
     'Titanic¹ (https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv).</p>'
     st.write(text, unsafe_allow_html=True)
-    build_nota_titanic()
+    build_nota_spotify()
 
 def build_body():
     df = read_titanic_df()
