@@ -4,7 +4,7 @@ import plotly.express as px
 from utils import read_df
 
 def build_nota_spotify():
-    with st.expander('¹Notas sobre o dataset do Titanic'):
+    with st.expander('¹Notas sobre o dataset do Spotify'):
         st.write(
         '''
         <table>
