@@ -4,7 +4,7 @@ import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-from pages.util.plot_pages_util import read_titanic_df, build_nota_titanic, build_dataframe_section
+from pages.util.plot_pages_util import read_titanic_df, build_nota_spotify, build_dataframe_section
 
 def build_page():
     build_header()

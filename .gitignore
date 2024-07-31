@@ -3,3 +3,6 @@ __pycache__
 .history
 *.html
 venv
+/data/*.parquet
+/reports/*
+pages/*X*
