@@ -19,7 +19,7 @@ def read_df(df_name, extension='csv', encoding='utf-8', low_memory=False):
 
 def __read_csv(path, encoding, low_memory=False):
     try:
-        df = pd.read_csv(path, sep=',', encoding=encoding, low_memory=low_memory)
+        df = pd.read_csv(path, sep=',', encoding=encoding, low_memory=low_memory, index_col=0)
     except:
         df = pd.read_csv(path, sep=';', encoding=encoding, low_memory=low_memory)
     return df
